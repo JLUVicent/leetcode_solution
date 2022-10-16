@@ -12,4 +12,3 @@ class Solution:
                 nums.remove(max_num)
                 i+=1
         return max_num
-            
