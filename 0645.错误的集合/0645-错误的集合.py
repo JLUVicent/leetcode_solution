@@ -7,11 +7,14 @@ class Solution:
         for i in range(len(nums)):
             if nums[i] in hashmap:
                 hashmap[nums[i]]+=1
-        new_list=[]
+        new_list=[None for _ in range(2)]
         for key,value in hashmap.items():
             if value==2:
-                new_list.append(key)
-        for key,value in hashmap.items():
+                new_list[0]=key
             if value==0:
-                new_list.append(key)
+                new_list[1]=key
+                
+        # for key,value in hashmap.items():
+        #     if value==0:
+        #         new_list.append(key)
         return new_list
