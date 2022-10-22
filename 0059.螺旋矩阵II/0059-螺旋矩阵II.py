@@ -1,19 +1,17 @@
-
-
 class Solution:
-    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        if not matrix or not matrix[0]:
-            return list()
-        rows, columns = len(matrix), len(matrix[0])
-        total = rows*columns
-        order = [0]*total
-        # 定义辅助数组
-        visited = [[False]*columns for _ in range(rows)]
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        num = pow(n, 2)
+        order = [0]*num
+        for i in range(num):
+            order[i] = i+1
+        rows, columns = n, n
         row, column = 0, 0
+        output_matrix = [[0]*n for _ in range(n)]
+        visited = [[False]*n for _ in range(n)]
         directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
         directionIndex = 0
-        for i in range(total):
-            order[i] = matrix[row][column]
+        for j in range(num):
+            output_matrix[row][column] = order[j]
             visited[row][column] = True
             nextRow, nextColumn = row + \
                 directions[directionIndex][0], column + \
@@ -22,4 +20,5 @@ class Solution:
                 directionIndex = (directionIndex+1) % 4
             row += directions[directionIndex][0]
             column += directions[directionIndex][1]
-        return order
+        return output_matrix
+
