@@ -1,24 +1,20 @@
 class Solution {
 public:
     string replaceSpace(string s) {
-        // 时间 O(n)
-        // 空间 O(1)
+
+        // 统计空格出现的次数
+        int OldSize = s.size() - 1;
         int count = 0;
-        int OldSize = s.size();
-        // 计算原字符串中空格的数量
-        for ( int i = 0; i < s.size() ; i++){
-            if ( s[i] == ' ' ){
+        for ( int i = 0; i < s.size(); i++){
+            if ( s[i] == ' '){
                 count++;
             }
         }
-        // 扩充新数组
-        s.resize( s.size() + count*2 );
-
-        int NewSize = s.size();
-
-        for ( int i = OldSize -1 , j = NewSize - 1; i < j ;  i--,j--){
-
-            if ( s[i] != ' '){
+        s.resize(s.size()+2*count);
+        
+        int NewSize = s.size() - 1;
+        for ( int i = OldSize, j = NewSize; i < j ; i-- , j--){
+            if (s[i] != ' '){
                 s[j] = s[i];
             }
             else{
@@ -29,5 +25,6 @@ public:
             }
         }
         return s;
+
     }
 };
