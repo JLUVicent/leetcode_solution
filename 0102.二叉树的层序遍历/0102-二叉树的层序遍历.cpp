@@ -12,27 +12,29 @@
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        // 定义队列存储节点用来遍历
+        // 使用队列进行层序遍历
         queue<TreeNode*> que;
-        // 用来存储最终结果
+        // 存储最终结果
         vector<vector<int>> result;
-        // 判断root节点是否为空
+        // 节点不为空将root加入队列
         if ( root != NULL ) que.push( root );
-        // 循环终止条件 队列为空
-        while( !que.empty() ){
-            // 记录队列的大小
-            int size = que.size(); //一定注意c++定义和python不同，要写int
-            vector<int> vec;    //容器存储每一层的元素
+        // 当队列不为空
+        while ( !que.empty() ){
+            // 先记录队列的大小
+            int size = que.size();
+            // 定义数组存储元素
+            vector<int> vec;
             while( size-- ){
-                TreeNode* node = que.front(); //存储头部节点
-                que.pop(); //弹出队头节点
-                vec.push_back(node->val);    //将元素推入数组 注意这里是推入元素的值，而非node节点
-                if(node->left) que.push(node->left); //将node的左节点加入队列
-                if(node->right) que.push(node->right); //将node的右节点加入队列
+                // 存储头部节点
+                TreeNode* node = que.front();   //存储头部节点
+                que.pop();  //弹出头部节点
+                vec.push_back(node->val);   //将节点加入数组
+                if(node->left) que.push(node->left);
+                if(node->right) que.push(node->right);
             }
-            result.push_back(vec);  //将vec加入结果数组
+            result.push_back(vec);  //记录每一层的结果
         }
-        return result; //返回值
+        return result;
 
     }
 };
