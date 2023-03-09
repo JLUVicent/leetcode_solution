@@ -11,23 +11,21 @@
  */
 class Solution {
 public:
-
     vector<int> preorderTraversal(TreeNode* root) {
-        // 定义栈存储二叉树节点
-        stack<TreeNode*> st;
+        // 定义数组
         vector<int> vec;
-        if ( root == NULL ) return vec;
+        // 定义栈
+        stack<TreeNode*> st;
+        if ( root == NULL ) return {};
         st.push( root );
-        while( !st.empty()){
+        while( !st.empty() ){
             TreeNode* node = st.top();
             st.pop();
-            // vec.push_back( node );
-            if ( node != NULL ) vec.push_back( node->val ); //中
-            else continue;
-            st.push( node -> right );//右
-            st.push( node -> left ); //左
+            if( node != NULL ) vec.push_back(node->val);
+            else continue;//如果为空直接跳过以下步骤
+            st.push( node->right );
+            st.push( node->left );
         }
         return vec;
-
     }
 };
