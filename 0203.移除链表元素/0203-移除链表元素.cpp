@@ -11,35 +11,12 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        // 使用原来的链表进行移除节点的操作
-        //删除头节点
-        // while( head != NULL && head->val==val){
-        //     ListNode* tmp = head;
-        //     head = head->next;
-        //     delete tmp;
-        // }
-
-        // //删除非头节点
-        // ListNode* cur = head;
-        // while( cur != NULL && cur->next != NULL){
-        //     if (cur->next->val == val){
-        //         ListNode* tmp=cur->next;
-        //         cur->next=cur->next->next;
-        //         delete tmp;
-        //     }
-        //     else{
-        //         cur = cur->next;
-        //     }
-        // }
-
-        // return head;
-
-        //使用虚拟头节点解决
-        ListNode* dummyHead = new ListNode(0);
-        dummyHead->next = head;
-        ListNode* cur = dummyHead;
+        if( head == NULL) return head;
+        ListNode* dummyhead = new ListNode(0);
+        dummyhead->next = head;
+        ListNode* cur = dummyhead;
         while( cur->next != NULL ){
-            if ( cur->next->val == val){
+            if( cur->next->val == val ){
                 ListNode* tmp = cur->next;
                 cur->next = cur->next->next;
                 delete tmp;
@@ -47,10 +24,11 @@ public:
             else{
                 cur = cur->next;
             }
+            
         }
-        head = dummyHead->next;
-        delete dummyHead;
+        head = dummyhead->next;
+        delete dummyhead;
         return head;
-        // return dummyHead->next;
-}
+
+    }
 };
