@@ -11,21 +11,20 @@
  */
 class Solution {
 public:
+    
+    void traversal(TreeNode* node , vector<int>& result){
+        if( node == NULL ) return;
+        
+        result.push_back( node->val );
+        traversal( node->left ,result);
+        traversal( node->right ,result);
+    }
+    
     vector<int> preorderTraversal(TreeNode* root) {
-        // 定义数组
-        vector<int> vec;
-        // 定义栈
-        stack<TreeNode*> st;
-        if ( root == NULL ) return {};
-        st.push( root );
-        while( !st.empty() ){
-            TreeNode* node = st.top();
-            st.pop();
-            if( node != NULL ) vec.push_back(node->val);
-            else continue;//如果为空直接跳过以下步骤
-            st.push( node->right );
-            st.push( node->left );
-        }
-        return vec;
+        vector<int> result;
+        traversal( root, result );
+        return result;
+        
+
     }
 };
