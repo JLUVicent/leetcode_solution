@@ -12,15 +12,28 @@
 class Solution {
 public:
     int minDepth(TreeNode* root) {
-        // 1.确定递归函数返回值和参数
-        // 2.确定终止条件
-        if ( root == NULL ) return 0;
-        // 3.确定单层递归逻辑
-        int leftHeight = minDepth( root -> left );//左
-        int rightHeight = minDepth( root -> right ); //右
-        if ( root->left == NULL && root->right != NULL ) return 1+rightHeight;  //注意这里root->left 写法
-        else if ( root->left != NULL && root->right == NULL ) return 1+leftHeight;
-        int result = 1 + min( leftHeight,rightHeight);
-        return result;
+        if(root == nullptr) return 0;
+        queue<TreeNode*> q;
+        q.push(root);
+        int depth = 1;
+        while(!q.empty()){
+            int sz = q.size();
+            for( int i = 0; i < sz; i++){
+                TreeNode* cur = q.front();
+                q.pop();
+                if( cur->left == nullptr && cur->right == nullptr){
+                    return depth;
+                }
+                if( cur->left != NULL){
+                    q.push(cur->left);
+                }
+                if( cur->right != NULL){
+                    q.push(cur->right);
+                }
+            }
+            depth++;
+        }
+        return depth;
+
     }
 };
