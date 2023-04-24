@@ -1,23 +1,22 @@
 
 
-typedef struct MylinkedList{
+
+typedef struct MyLinkedList{
     int val;
     struct MyLinkedList* next;
-}MyLinkedList;
+} MyLinkedList;
+
 
 MyLinkedList* myLinkedListCreate() {
-    // MylinkedList* head = (MylinkedList *)malloc(sizeof (MylinkedList));
-    MyLinkedList* head = (MyLinkedList *)malloc(sizeof (MyLinkedList));
+    MyLinkedList* head = (MyLinkedList*)malloc(sizeof(MyLinkedList));
     head->next = NULL;
     return head;
-
 }
 
 int myLinkedListGet(MyLinkedList* obj, int index) {
-    // myLinkedList *cur = obj->next;
-    MyLinkedList *cur = obj->next;
-
-    for( int i = 0; cur != NULL; i++){
+    MyLinkedList* cur = (MyLinkedList*)malloc(sizeof(MyLinkedList));//1111
+    cur = obj->next;
+    for( int i = 0; cur!=NULL; i++){
         if( i == index){
             return cur->val;
         }else{
@@ -25,25 +24,28 @@ int myLinkedListGet(MyLinkedList* obj, int index) {
         }
     }
     return -1;
-
 }
-//obj为虚拟头结点
+
 void myLinkedListAddAtHead(MyLinkedList* obj, int val) {
     MyLinkedList* nhead = (MyLinkedList*)malloc(sizeof(MyLinkedList));
     nhead->val = val;
+
+    // MyLinkedList* tmp = obj->next;
     nhead->next = obj->next;
     obj->next = nhead;
+    
+    // free(tmp);
 }
 
 void myLinkedListAddAtTail(MyLinkedList* obj, int val) {
-    MyLinkedList* ntail = (MyLinkedList*)malloc(sizeof(MyLinkedList));
-    ntail->val = val;
-    MyLinkedList* cur = obj;
-    while( cur->next != NULL){
+    MyLinkedList* thead = (MyLinkedList*)malloc(sizeof(MyLinkedList));
+    thead->val = val;
+    MyLinkedList* cur = obj;//11111
+    while(cur->next != NULL){
         cur = cur->next;
     }
-    cur->next = ntail;
-    ntail->next = NULL;
+    cur->next = thead;
+    thead->next = NULL;
 }
 
 void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
@@ -51,10 +53,10 @@ void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
         myLinkedListAddAtHead(obj,val);
         return;
     }
-    MyLinkedList *cur = obj->next;
-    for( int i  = 1; cur != NULL; i++){
+    MyLinkedList* cur = obj->next;
+    for( int i = 1; cur != NULL; i++ ){
         if( i == index){
-            MyLinkedList* newnode = (MyLinkedList *)malloc(sizeof (MyLinkedList));
+            MyLinkedList* newnode = (MyLinkedList*)malloc(sizeof(MyLinkedList));
             newnode->val = val;
             newnode->next = cur->next;
             cur->next = newnode;
@@ -63,7 +65,6 @@ void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
             cur = cur->next;
         }
     }
-
 }
 
 void myLinkedListDeleteAtIndex(MyLinkedList* obj, int index) {
@@ -76,7 +77,7 @@ void myLinkedListDeleteAtIndex(MyLinkedList* obj, int index) {
         return;
     }
     MyLinkedList* cur = obj->next;
-    for( int i = 1; cur != NULL && cur->next != NULL; i++){
+    for( int i = 1; cur != NULL; i++){
         if( i == index){
             MyLinkedList* tmp = cur->next;
             if( tmp != NULL){
@@ -84,17 +85,14 @@ void myLinkedListDeleteAtIndex(MyLinkedList* obj, int index) {
                 free(tmp);
             }
             return;
-        }
-        else{
+        }else{
             cur = cur->next;
         }
     }
-
-
 }
 
 void myLinkedListFree(MyLinkedList* obj) {
-    while(obj != NULL){
+    while( obj){
         MyLinkedList* tmp = obj;
         obj = obj->next;
         free(tmp);

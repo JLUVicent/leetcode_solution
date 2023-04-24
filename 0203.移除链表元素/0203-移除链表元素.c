@@ -12,7 +12,7 @@ struct ListNode* removeElements(struct ListNode* head, int val){
     dummyhead = (struct ListNode*)malloc(sizeof(struct ListNode));
     dummyhead->next = head;
     struct ListNode* cur = dummyhead;
-    while(cur->next != NULL){
+    while( cur->next ){
         if( cur->next->val == val){
             struct ListNode* tmp = cur->next;
             cur->next = cur->next->next;
