@@ -11,37 +11,30 @@
  */
 class Solution {
 public:
-    //递归函数的参数和返回值
-    void traversal(TreeNode* node, vector<int>& vec){
-        //确定终止条件
-        if( node == NULL) return;
-
-        //确定单层递归逻辑
-        vec.push_back(node->val);//中
-        traversal(node->left,vec);   //左
-        traversal(node->right,vec); //右
+    //递归
+    void Traversal(TreeNode* node, vector<int>& vec){
+        if( node==NULL) return;
+        vec.push_back(node->val);   //中
+        Traversal(node->left,vec);  //左
+        Traversal(node->right,vec); //右
     }
-
     vector<int> preorderTraversal(TreeNode* root) {
-        // 使用栈来进行遍历
-        // stack<TreeNode*> st;
-        // //存储结果
+
+        // //迭代法
         // vector<int> result;
-        // if( root == NULL ) return result;
+        // if( root == NULL) return result;
+        // stack<TreeNode*> st;
         // st.push(root);
-        // // result.push_back(root->val);
-        // while( !st.empty() ){
+        // while(!st.empty()){
         //     TreeNode* node = st.top();
         //     st.pop();
         //     result.push_back(node->val);
-        //     if( node->right ) st.push(node->right);//入栈先入右孩子再入左孩子
-        //     if( node->left ) st.push(node->left);
+        //     if( node->right) st.push(node->right);
+        //     if( node->left) st.push(node->left);    //左
         // }
         // return result;
-        
-        //递归遍历
         vector<int> result;
-        traversal(root,result);
+        Traversal(root,result);
         return result;
     }
 };
