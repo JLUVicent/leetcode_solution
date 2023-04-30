@@ -5,13 +5,20 @@
  *     struct ListNode *next;
  * };
  */
-struct ListNode* reverse(struct ListNode* pre,struct ListNode* cur){
-     if(cur == NULL) return pre;
-     struct ListNode* tmp = cur->next;
-     cur->next = pre;
-     return reverse(cur,tmp);
- }
+
 
 struct ListNode* reverseList(struct ListNode* head){
-    return reverse(NULL,head);
+    //Ë«Ö¸Õë
+    struct ListNode* cur = head;
+    struct ListNode* pre = NULL;
+    if( cur == NULL) return NULL;
+    // per->next = head;
+    while( cur != NULL){
+        struct ListNode* tmp = cur->next;
+        cur->next = pre;
+        // pre->next = NULL;
+        pre = cur;
+        cur = tmp;
+    }
+    return pre;
 }
