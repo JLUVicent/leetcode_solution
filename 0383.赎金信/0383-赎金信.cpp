@@ -1,21 +1,23 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        // 数组作为哈希表
-        int record[26] = {0};
-        if ( ransomNote.size() > magazine.size() ){
-            return false;
+        // unordered_map<char,int> map;
+        // for( char c:ransomNote){
+        //     map[c]++;
+        // }
+        // for( char c:magazine){
+
+        // }
+        int a[26] = {0};
+        for(char c:ransomNote){
+            a[c-'a']++;
         }
-        for ( int i = 0; i < magazine.size(); i++){
-            record[magazine[i] - 'a']++;
+        for( char c:magazine){
+            a[c-'a']--;
         }
-        for ( int i = 0; i < ransomNote.size(); i++){
-            record[ransomNote[i] - 'a']--;
-            if ( record[ransomNote[i] - 'a'] < 0 ){
-                return false;
-            }
+        for( int i = 0; i < 26;i++){
+            if(a[i] > 0) return false;
         }
         return true;
-
     }
 };
