@@ -1,30 +1,27 @@
 class Solution {
 public:
     string replaceSpace(string s) {
-
-        // 统计空格出现的次数
-        int OldSize = s.size() - 1;
+        //先计算有多少个空格，也就是还原后的s总长度
         int count = 0;
-        for ( int i = 0; i < s.size(); i++){
-            if ( s[i] == ' '){
-                count++;
-            }
+        int oldSize = s.size();
+        for( char c:s){
+            if(c == ' ') count++;
         }
         s.resize(s.size()+2*count);
+        // for( int )
+        int newSize = s.size();
         
-        int NewSize = s.size() - 1;
-        for ( int i = OldSize, j = NewSize; i < j ; i-- , j--){
-            if (s[i] != ' '){
+        int flag = 0;
+        for( int i = oldSize-1,j = newSize-1; i < j; i--,j--){
+            if(s[i] != ' '){
                 s[j] = s[i];
-            }
-            else{
-                s[j] = '0';
-                s[j-1] = '2';
-                s[j-2] = '%';
-                j -=2;
+            }else{
+                s[j--] = '0';
+                s[j--] = '2';
+                s[j] = '%';
+                // j-=2;
             }
         }
         return s;
-
     }
 };

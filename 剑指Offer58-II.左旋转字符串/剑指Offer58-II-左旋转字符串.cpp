@@ -1,10 +1,18 @@
 class Solution {
 public:
-    string reverseLeftWords(string s, int n) {
-        reverse( s.begin() , s.begin() + n );
-        reverse( s.begin() + n , s.end());
-        reverse( s.begin() , s.end());
-        return s;
 
+    void reverse(string& s, int left,int right){
+        while(left<right){     //×ó±ÕÓÒ±Õ
+            swap(s[left],s[right]);
+            left++;
+            right--;
+        }
+    }
+
+    string reverseLeftWords(string s, int n) {
+        reverse(s,0,s.size()-1);
+        reverse(s,0,s.size()-1-n);
+        reverse(s,s.size()-n,s.size()-1);
+        return s;
     }
 };
