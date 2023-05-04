@@ -1,37 +1,37 @@
 class MyStack {
 public:
-    queue<int> que;
+    queue<int> que1;
+    queue<int> que2;
     MyStack() {
 
     }
     
     void push(int x) {
-        que.push(x);
-
+        que1.push(x);
     }
     
     int pop() {
-        // 获取队列的大小
-        int size = que.size();
+        int size = que1.size();
         size--;
-        while(size--){//将队列的头元素循环添加到队列中，循环size-1次，同时弹出头元素。
-            que.push(que.front());
-            que.pop();
+        while(size--){
+            que2.push(que1.front());
+            que1.pop();
         }
-        int result = que.front();//记录头元素
-        que.pop();
+        int result = que1.front();
+        que1.pop();
+        que1 = que2;
+        while(!que2.empty()){   //第二个队列相当于备份作用
+            que2.pop();
+        }
         return result;
-
     }
     
     int top() {
-        return que.back();
-
+        return que1.back();
     }
     
     bool empty() {
-        return que.empty();
-
+        return que1.empty()&&que2.empty();
     }
 };
 

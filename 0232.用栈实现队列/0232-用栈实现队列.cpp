@@ -7,26 +7,26 @@ public:
     }
     
     void push(int x) {
-        stIn.push(x);   
+        stIn.push(x);
     }
     
     int pop() {
-        //当stOut为空时候导入数据
-        if( stOut.empty()){
+        if(stOut.empty()){
             while(!stIn.empty()){
-                stOut.push(stIn.top());
+                int tmp = stIn.top();
                 stIn.pop();
+                stOut.push(tmp);
             }
         }
-        int result = stOut.top();
+        int tmp = stOut.top();
         stOut.pop();
-        return result;
+        return tmp;
     }
     
     int peek() {
-        int res = this->pop();
-        stOut.push(res);    //pop弹出了栈顶元素，再添加回去
-        return res;
+        int tmp = this->pop();
+        stOut.push(tmp);
+        return tmp;
     }
     
     bool empty() {

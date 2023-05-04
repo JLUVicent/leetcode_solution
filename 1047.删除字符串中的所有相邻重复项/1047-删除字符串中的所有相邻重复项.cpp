@@ -1,36 +1,28 @@
 class Solution {
 public:
     string removeDuplicates(string s) {
-        // if (s.size() == 1) return s;
-        // // 定义一个栈
         // stack<int> st;
-        // for ( int i = 0; i < s.size() ; i++){
-        //     // 如果栈为空
-        //     if ( st.empty() || s[i] != st.top() ){
-        //         st.push(s[i]);
-        //     }
-        //     else if ( s[i] == st.top()){
+        // if(  s.size() == 1) return s;
+        // for( int i = 0; i < s.size(); i++){
+        //     if( st.empty() || st.top() != s[i]) st.push(s[i]);
+        //     else if( st.top() == s[i]){
         //         st.pop();
         //     }
-        //     // else if ( s[i] != st.top() ){
-        //     //     st.push(s[i]);
-        //     // }
         // }
-        // string result = "";
-        // while( !st.empty()){ //将栈中的元素result字符串汇总
-        //     result += st.top();
+        // string result;
+        // while( !st.empty()){
+        //     char tmp = st.top();
         //     st.pop();
+        //     result+=tmp;
         // }
-        // reverse( result.begin(),result.end());//此时字符串需要反转
+        // reverse(result.begin(),result.end());
         // return result;
+
+        //直接将字符串作为栈
         string result;
-        for( char t: s){
-            if ( result.empty() || result.back() != t){
-                result.push_back(t);
-            }
-            else{
-                result.pop_back();
-            }
+        for( char c:s){
+            if( result.empty() || result.back() != c) result.push_back(c);
+            else if( result.back() == c) result.pop_back();
         }
         return result;
     }
