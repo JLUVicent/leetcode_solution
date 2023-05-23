@@ -12,34 +12,35 @@
 class Solution {
 public:
 
-    // 1.确定递归函数的返回值和参数
-    void traversal(TreeNode* cur,vector<int>& path,vector<string>& result){
-        path.push_back(cur->val); //中，中为什么写在这里，因为最后一个节点要加入到path中
-        if ( cur->left == NULL && cur->right == NULL ){
+    void traversal(TreeNode* node,vector<int>& path,vector<string>& res){
+        path.push_back(node->val);
+        if( node->left == NULL && node->right == NULL){
             string sPath;
-            for ( int i = 0; i < path.size()-1; i++){
+            for( int i = 0; i < path.size() - 1; i++){
                 sPath += to_string(path[i]);
-                sPath +="->";
+                sPath += "->";
             }
-            sPath += to_string( path[path.size() - 1]);
-            result.push_back(sPath);
+            sPath += to_string(path[path.size() - 1]);
+            res.push_back(sPath);
             return;
         }
-        if (cur -> left){   //左
-            traversal( cur->left , path , result);
-            path.pop_back();//回溯
+        //左
+        if(node->left){
+            traversal(node->left,path,res);
+            path.pop_back();
         }
-        if (cur -> right ){ //右
-            traversal( cur->right, path, result);
-            path.pop_back();//回溯
+        if( node->right){
+            traversal(node->right,path,res);
+            path.pop_back();
         }
     }
 
     vector<string> binaryTreePaths(TreeNode* root) {
-        vector<string> result;
+        vector<string> res;
         vector<int> path;
-        if( root ==  NULL) return result;
-        traversal( root, path, result);
-        return result;
+        if(root == NULL) return res;
+        traversal(root,path,res);
+        return res;
+
     }
 };
