@@ -6,26 +6,22 @@
  * };
  */
 
-// struct ListNode{
-//     int val;
-//     struct ListNode *next;
-// };
 
 struct ListNode* removeElements(struct ListNode* head, int val){
-    //定义虚拟头结点
     struct ListNode* dummyhead = (struct ListNode*)malloc(sizeof(struct ListNode));
+    // dummyhead->val = 0;
     dummyhead->next = head;
     struct ListNode* cur = dummyhead;
     while(cur->next){
-        if(cur->next->val == val){
-            struct ListNode* tmp = cur->next;
-            cur->next = tmp->next;
-            free(tmp);
-        }else{
+        if( cur->next->val != val){
             cur = cur->next;
+        }else{
+            struct ListNode* tmp = cur->next;
+            cur->next = cur->next->next;
+            free(tmp);
         }
     }
     head = dummyhead->next;
     free(dummyhead);
     return head;
-}
+}   
