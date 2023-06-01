@@ -11,41 +11,20 @@
  */
 class Solution {
 public:
-    int MaxDepth = INT_MIN;
-    int res;
-    void traversal(TreeNode* node,int depth){
-        if( node->left == NULL && node->right == NULL){
-            if( depth > MaxDepth){
-                MaxDepth = depth;
-                res = node->val;
+    int findBottomLeftValue(TreeNode* root) {
+        queue<TreeNode*> que;
+        que.push(root);
+        int result;
+        while( !que.empty()){
+            int size = que.size();
+            for( int i = 0; i < size; i++){
+                TreeNode* node = que.front();
+                que.pop();
+                if( i == 0) result = node->val;
+                if( node->left) que.push(node->left);
+                if( node->right) que.push(node->right);
             }
         }
-        if( node->left){
-            traversal(node->left,depth+1);
-        }
-        if( node->right){
-            traversal(node->right,depth+1);
-        }
-    }
-    int findBottomLeftValue(TreeNode* root) {
-        // //≤„–Ú±È¿˙
-        // queue<TreeNode*> que;
-        // int res;
-        // if(root == NULL) return res;
-        // que.push(root);
-        // while(!que.empty()){
-        //     int size = que.size();
-        //     for( int i = 0; i < size; i++){
-        //         TreeNode* node = que.front();
-        //         que.pop();
-        //         if(i == 0) res = node->val;
-        //         if( node ->left)que.push(node->left);
-        //         if( node ->right)que.push(node->right);
-        //     }
-        // }
-        // return res;
-        traversal(root,0);
-        return res;
-
+        return result;
     }
 };
