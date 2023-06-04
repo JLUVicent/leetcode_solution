@@ -11,34 +11,30 @@
  */
 class Solution {
 public:
-        // 1.确定返回值和参数
-        // 2.确定终止条件 找到路径
-    bool traversal( TreeNode* root,int targetSum){
-        if( root->left == NULL && root->right == NULL && targetSum == 0){
+
+    //1.确定返回值和参数
+    bool traversal(TreeNode* node, int targetSum){
+        // 2.确定终止条件
+        if( node->left == NULL && node->right == NULL && targetSum == 0){
             return true;
         }
-        if( root->left == NULL && root->right == NULL && targetSum != 0){
+        if( node->left == NULL && node->right == NULL && targetSum != 0){
             return false;
         }
-        // 3.确定单层递归逻辑
-        // 左
-        if ( root->left && (traversal( root->left, targetSum-root->left->val)) ) return true;
-        // if( root->left ){
-        //     if ( traversal( root->left ,targetSum-root->left->val)) return true;
-        // }
-        
-        // // 右
-        if ( root->right && (traversal( root->right, targetSum-root->right->val)) ) return true;
-        // if( root->right ){
-        //     if ( traversal( root->right ,targetSum-root->right->val)) return true;
-        // }
-        return false;
-    }
-    
-    bool hasPathSum(TreeNode* root, int targetSum) {
 
+        //确定单层递归逻辑
+        //左
+        if( node->left && (traversal( node->left,targetSum - node->left->val))) return true;
+        //右
+        if( node->right && (traversal( node->right,targetSum - node->right->val))) return true;
+        
+        return false;
+
+    }
+
+    bool hasPathSum(TreeNode* root, int targetSum) {
         if( root == NULL) return false;
-        return traversal(root,targetSum-root->val);
+        return traversal(root,targetSum - root->val);
 
     }
 };

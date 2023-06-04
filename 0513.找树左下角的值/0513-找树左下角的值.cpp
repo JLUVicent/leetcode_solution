@@ -11,20 +11,31 @@
  */
 class Solution {
 public:
-    int findBottomLeftValue(TreeNode* root) {
-        queue<TreeNode*> que;
-        que.push(root);
-        int result;
-        while( !que.empty()){
-            int size = que.size();
-            for( int i = 0; i < size; i++){
-                TreeNode* node = que.front();
-                que.pop();
-                if( i == 0) result = node->val;
-                if( node->left) que.push(node->left);
-                if( node->right) que.push(node->right);
+
+    // 定义两个全局变量
+    int MaxDepth = INT_MIN;
+    int result;
+    // 使用递归遍历
+    void traversal( TreeNode* node, int depth){
+        // 确定终止条件
+        if( node->left == NULL && node->right == NULL){
+            if( depth > MaxDepth){
+                MaxDepth = depth;
+                result = node->val;
             }
         }
+        //左
+        if(node->left){
+            traversal( node->left,depth+1); //
+        }
+        //右
+        if( node->right){
+            traversal( node->right,depth+1);//有回溯的过程
+        }
+    }
+    int findBottomLeftValue(TreeNode* root) {
+        traversal( root,0);
         return result;
+
     }
 };
