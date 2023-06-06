@@ -2,29 +2,30 @@ class Solution {
 public:
 
     vector<int> path;
-    vector<vector<int>> result;
-    void backtracking(vector<int>& candidates, int target,int sum,int startIndex){
-        // if( sum > target ) return;
-        if( sum == target ){
-            result.push_back( path );
-            return ;
+    vector<vector<int>> res;
+    //1.确定参数和返回值
+    void backtracking(vector<int>& candidates,int target ,int startIndex){
+        // if( sum > target) return;
+        int sum = 0;
+        for( int i = 0;i < path.size();i++){
+            sum+=path[i];
         }
-
-        for( int i = startIndex; i < candidates.size() && sum + candidates[i] <= target; i++){
+        if( sum == target){
+            res.push_back(path);
+            return;
+        }
+        for( int i = startIndex;i < candidates.size() && sum+candidates[i] <= target;i++){
             path.push_back(candidates[i]);
-            sum += candidates[i];
-            backtracking( candidates, target , sum,i);
-            sum -= candidates[i];
+            // sum+=candidates[i];
+            backtracking(candidates,target,i);
             path.pop_back();
+            // sum-=candidates[i];
         }
-
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        // 排序
-        sort( candidates.begin(),candidates.end());
-        backtracking( candidates, target, 0,0);
-        return result;
-        
+        sort(candidates.begin(),candidates.end());
+        backtracking(candidates,target,0);
+        return res;
     }
 };
