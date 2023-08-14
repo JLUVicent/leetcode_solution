@@ -7,17 +7,15 @@ public:
     }
 
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
-        // Êı×éÅÅĞò
-        sort( intervals.begin(),intervals.end(),cmp);
-        int result = 0;
-        for( int i = 1; i < intervals.size(); i++){
-            if( intervals[i][0] < intervals[i-1][1]){
-                result++;
-                intervals[i][1] = min(intervals[i][1],intervals[i-1][1]);
-
+        sort(intervals.begin(),intervals.end(),cmp);
+        int res = 0;
+        for( int i = 0; i < intervals.size()-1; i++){
+            if( intervals[i][1] > intervals[i+1][0]){
+                res++;
+                intervals[i+1][1] = min(intervals[i][1],intervals[i+1][1]);
             }
         }
-        return result;
+        return res;
 
     }
 };

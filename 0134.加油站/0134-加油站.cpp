@@ -1,18 +1,19 @@
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int cursum = 0;
-        int totalsum = 0;
-        int start = 0;      //记录可以转一圈的起始位置
+        int curSum = 0;
+        int totalSum = 0;
+        int res = 0;
         for( int i = 0; i < gas.size(); i++){
-            cursum += ( gas[i] - cost[i] );
-            totalsum += ( gas[i] - cost[i] );
-            if( cursum < 0 ){
-                cursum = 0;
-                start = i + 1;
+            curSum += (gas[i] - cost[i]);
+            totalSum += (gas[i] - cost[i]);
+            if( curSum < 0){
+                curSum = 0;
+                res = i+1;
             }
         }
-        if( totalsum < 0) return -1;
-        return start;
-    }  
+        if( totalSum < 0) return -1;
+        return res;
+
+    }
 };
