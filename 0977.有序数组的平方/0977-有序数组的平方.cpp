@@ -1,24 +1,18 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        // ʱ�䣺O(logn)
-        // �ռ䣺O(n)
-        int left = 0;
-        int right = nums.size()-1;
-        vector<int> result(nums.size(),0);
-        int k = nums.size()-1;
-        while( left <= right){
-            if( nums[left]*nums[left] > nums[right]*nums[right]){
-                result[k--]=nums[left]*nums[left];
+        int left = 0, right = nums.size()-1;
+        int j = nums.size()-1;
+        vector<int> res(nums.size());
+        while(left <= right){
+            if(nums[left] * nums[left] > nums[right]* nums[right]){
+                res[j--] = nums[left]*nums[left];
                 left++;
-            }else{
-                result[k--]=(nums[right]*nums[right]);
+            }else if(nums[left]*nums[left] <= nums[right]*nums[right]){
+                res[j--] = nums[right]*nums[right];
                 right--;
             }
         }
-        // sort();
-        // reverse(result.begin(),result.end());
-        return result;
-
+        return res;
     }
 };
