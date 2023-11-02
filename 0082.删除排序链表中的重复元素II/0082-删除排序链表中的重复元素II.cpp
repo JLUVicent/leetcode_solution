@@ -11,13 +11,13 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        ListNode* dummyhead = new ListNode(-101);
+        ListNode* dummyhead = new ListNode(-1);
         dummyhead->next = head;
         ListNode* cur = dummyhead;
-        while( cur->next != NULL && cur->next->next != NULL){
+        while( cur->next && cur->next->next){
             if( cur->next->val == cur->next->next->val){
-                int tmp = cur->next->val;
-                while( cur->next != NULL && cur->next->val == tmp){
+                int x = cur->next->val;
+                while( cur->next && cur->next->val == x){
                     cur->next = cur->next->next;
                 }
             }else{
@@ -25,5 +25,6 @@ public:
             }
         }
         return dummyhead->next;
+
     }
 };
